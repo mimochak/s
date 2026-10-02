@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales — Terra Oliva",
+  title: "Mentions légales — Golden Spoon Bio",
 };
 
 export default function LegalPage() {
@@ -18,12 +18,12 @@ export default function LegalPage() {
           <section>
             <h2 className="mb-2 font-serif text-xl text-ink-950">Éditeur du site</h2>
             <p>
-              Terra Oliva — [Forme juridique, ex. SARL] au capital de [montant]€<br />
+              Golden Spoon Bio — [Forme juridique, ex. SARL] au capital de [montant]€<br />
               Siège social&nbsp;: Vallée des Baux, [adresse complète], France<br />
               SIREN&nbsp;: [à compléter] · RCS&nbsp;: [à compléter]<br />
               N° TVA intracommunautaire&nbsp;: [à compléter]<br />
               Directeur de la publication&nbsp;: [nom]<br />
-              Contact&nbsp;: contact@terra-oliva.fr
+              Contact&nbsp;: contact@goldenspoonbio.fr
             </p>
           </section>
 
@@ -48,7 +48,7 @@ export default function LegalPage() {
               Conformément au Règlement Général sur la Protection des Données
               (RGPD), vous disposez d&rsquo;un droit d&rsquo;accès, de
               rectification et de suppression des données vous concernant.
-              Pour l&rsquo;exercer, contactez-nous à contact@terra-oliva.fr.
+              Pour l&rsquo;exercer, contactez-nous à contact@goldenspoonbio.fr.
             </p>
           </section>
 

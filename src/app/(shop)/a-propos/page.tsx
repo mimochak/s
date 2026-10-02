@@ -3,9 +3,9 @@ import Link from "next/link";
 import { LeafCheckIcon, ShieldIcon, DropletIcon, MapPinIcon, ArrowUpRightIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
-  title: "Notre histoire — Terra Oliva",
+  title: "Notre histoire — Golden Spoon Bio",
   description:
-    "Découvrez l'histoire de Terra Oliva, domaine oléicole familial et biologique de la Vallée des Baux.",
+    "Découvrez l'histoire de Golden Spoon Bio, domaine oléicole familial et biologique de la Vallée des Baux.",
 };
 
 const VALUES = [
@@ -41,7 +41,7 @@ export default function AboutPage() {
             Un domaine familial, <em>une exigence biologique.</em>
           </h1>
           <p className="mt-6 max-w-2xl text-cream-100/70">
-            Terra Oliva est né de la volonté de produire une huile d&rsquo;olive
+            Golden Spoon Bio est né de la volonté de produire une huile d&rsquo;olive
             honnête&nbsp;: cultivée sans compromis, pressée près de la récolte,
             et vendue sans intermédiaire entre notre moulin et votre cuisine.
           </p>

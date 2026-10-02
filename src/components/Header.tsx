@@ -20,7 +20,10 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 text-cream-50">
           <OliveBranchIcon className="h-6 w-10 text-gold-500" />
-          <span className="font-serif text-xl tracking-wide">Terra Oliva</span>
+          <span className="font-serif text-xl tracking-wide">Golden Spoon</span>
+          <span className="rounded-full border border-gold-500/40 px-2 py-0.5 text-[10px] uppercase tracking-widest2 text-gold-500">
+            Bio
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

@@ -18,7 +18,7 @@ export const revalidate = 0;
 
 export default async function HomePage() {
   const featuredProducts = await prisma.product.findMany({
-    where: { featured: true },
+    where: { featured: true, active: true },
     orderBy: { position: "asc" },
     take: 4,
   });

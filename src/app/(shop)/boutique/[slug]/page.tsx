@@ -20,9 +20,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
-  if (!product) return { title: "Produit introuvable — Terra Oliva" };
+  if (!product) return { title: "Produit introuvable — Golden Spoon Bio" };
   return {
-    title: `${product.name} — Terra Oliva`,
+    title: `${product.name} — Golden Spoon Bio`,
     description: product.shortDesc,
   };
 }
@@ -34,10 +34,10 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
   const product = await getProduct(slug);
-  if (!product) notFound();
+  if (!product || !product.active) notFound();
 
   const related = await prisma.product.findMany({
-    where: { profile: product.profile, id: { not: product.id } },
+    where: { profile: product.profile, id: { not: product.id }, active: true },
     take: 3,
     orderBy: { position: "asc" },
   });

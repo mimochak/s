@@ -5,13 +5,14 @@ import { ProductCard } from "@/components/ProductCard";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Boutique — Terra Oliva",
+  title: "Boutique — Golden Spoon Bio",
   description:
     "Toute notre gamme d'huile d'olive extra vierge biologique : Fruité Vert, Fruité Mûr et coffrets découverte.",
 };
 
 export default async function BoutiquePage() {
   const products = await prisma.product.findMany({
+    where: { active: true },
     orderBy: { position: "asc" },
   });
 
