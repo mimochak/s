@@ -28,7 +28,7 @@ export function AdminSidebar({ unreadMessages = 0 }: { unreadMessages?: number }
       <div className="flex items-center gap-2 border-b border-cream-100/10 px-6 py-5">
         <OliveBranchIcon className="h-5 w-8 text-gold-500" />
         <div>
-          <p className="font-serif text-sm leading-tight">Golden Spoon Bio</p>
+          <p className="font-serif text-sm leading-tight">Golden Spoon</p>
           <p className="text-[10px] uppercase tracking-widest2 text-cream-100/40">Administration</p>
         </div>
       </div>

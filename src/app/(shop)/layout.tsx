@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
-  title: "Golden Spoon Bio — Huile d'Olive Extra Vierge Biologique",
+  title: "Golden Spoon — Huile d'Olive Extra Vierge Biologique",
   description:
     "Huile d'olive extra vierge biologique, récoltée à la main et pressée à froid dans la Vallée des Baux. Du domaine à la bouteille.",
 };

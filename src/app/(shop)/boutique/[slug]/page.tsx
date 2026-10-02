@@ -20,9 +20,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
-  if (!product) return { title: "Produit introuvable — Golden Spoon Bio" };
+  if (!product) return { title: "Produit introuvable — Golden Spoon" };
   return {
-    title: `${product.name} — Golden Spoon Bio`,
+    title: `${product.name} — Golden Spoon`,
     description: product.shortDesc,
   };
 }

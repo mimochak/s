@@ -1,10 +1,10 @@
-# Golden Spoon Bio — Boutique d'huile d'olive bio
+# Golden Spoon — Boutique d'huile d'olive bio
 
 Site e-commerce pour la vente d'huile d'olive extra vierge biologique,
 construit avec Next.js (App Router), Tailwind CSS, Prisma/SQLite et Stripe
 (mode test). Inclut un espace d'administration protégé par mot de passe.
 
-> **Golden Spoon Bio** est une marque et un domaine fictifs, utilisés comme
+> **Golden Spoon** est une marque et un domaine fictifs, utilisés comme
 > contenu de démonstration. Le nom « Golden Spoon » est par ailleurs déjà
 > utilisé comme marque commerciale par une autre entreprise (huile d'olive
 > tunisienne) — vérifiez sa disponibilité avant tout usage commercial réel.

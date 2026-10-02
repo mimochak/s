@@ -5,7 +5,7 @@ import { OliveBranchIcon } from "@/components/Icons";
 import { login } from "./actions";
 
 export const metadata: Metadata = {
-  title: "Connexion admin — Golden Spoon Bio",
+  title: "Connexion admin — Golden Spoon",
 };
 
 export default async function AdminLoginPage({
@@ -24,7 +24,7 @@ export default async function AdminLoginPage({
         <div className="mb-8 flex items-center gap-2">
           <OliveBranchIcon className="h-6 w-10 text-gold-500" />
           <div>
-            <p className="font-serif text-lg leading-tight">Golden Spoon Bio</p>
+            <p className="font-serif text-lg leading-tight">Golden Spoon</p>
             <p className="text-xs uppercase tracking-widest2 text-cream-100/50">Administration</p>
           </div>
         </div>

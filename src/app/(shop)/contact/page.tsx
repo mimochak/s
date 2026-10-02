@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { MapPinIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
-  title: "Contact — Golden Spoon Bio",
+  title: "Contact — Golden Spoon",
 };
 
 export default function ContactPage() {
@@ -28,7 +28,7 @@ export default function ContactPage() {
             </div>
             <div>
               <h2 className="text-xs uppercase tracking-widest2 text-sage-600">E-mail</h2>
-              <p className="mt-2 text-sm text-ink-950/70">contact@goldenspoonbio.fr</p>
+              <p className="mt-2 text-sm text-ink-950/70">contact@goldenspoon.fr</p>
             </div>
             <div>
               <h2 className="text-xs uppercase tracking-widest2 text-sage-600">Téléphone</h2>

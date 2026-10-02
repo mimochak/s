@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/ProductCard";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Boutique — Golden Spoon Bio",
+  title: "Boutique — Golden Spoon",
   description:
     "Toute notre gamme d'huile d'olive extra vierge biologique : Fruité Vert, Fruité Mûr et coffrets découverte.",
 };

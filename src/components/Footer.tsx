@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <div className="mb-3 flex items-center gap-2 text-cream-50">
               <OliveBranchIcon className="h-5 w-8 text-gold-500" />
-              <span className="font-serif text-lg">Golden Spoon Bio</span>
+              <span className="font-serif text-lg">Golden Spoon</span>
             </div>
             <p className="text-sm leading-relaxed">
               Huile d'olive extra vierge biologique, pressée à froid dans la
@@ -40,7 +40,7 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-xs uppercase tracking-widest2 text-gold-500">Contact</h3>
             <ul className="space-y-2 text-sm">
-              <li>contact@goldenspoonbio.fr</li>
+              <li>contact@goldenspoon.fr</li>
               <li>+33 (0)4 00 00 00 00</li>
               <li>Vallée des Baux, France</li>
             </ul>
@@ -48,7 +48,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream-100/10 pt-6 text-xs text-cream-100/50 md:flex-row">
-          <p>© {new Date().getFullYear()} Golden Spoon Bio. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} Golden Spoon. Tous droits réservés.</p>
           <p>Agriculture Biologique · Certifié par un organisme agréé UE</p>
         </div>
       </div>
