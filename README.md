@@ -32,6 +32,11 @@ construit avec Next.js (App Router), Tailwind CSS, Prisma/SQLite et Stripe
 - Gestion des commandes : liste filtrable par statut, détail, mise à jour du statut
 - Messages de contact : boîte de réception, marquage lu/non lu, suppression
 
+## Déployer sur un VPS
+
+Voir [`DEPLOY.md`](./DEPLOY.md) pour un script de déploiement en une
+commande (Node.js, Nginx, PM2, HTTPS via Let's Encrypt).
+
 ## Démarrage
 
 ```bash
