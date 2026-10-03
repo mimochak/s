@@ -7,7 +7,8 @@ module.exports = {
       args: "start",
       env: {
         NODE_ENV: "production",
-        PORT: "3000",
+        // Overridable: PORT=3005 pm2 start ecosystem.config.js
+        PORT: process.env.PORT || "3000",
       },
     },
   ],

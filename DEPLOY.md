@@ -1,8 +1,14 @@
-# Déployer Golden Spoon sur un VPS
+# Déployer Golden Spoon sur un VPS (partagé avec d'autres services)
 
-Ce guide déploie le site sur un VPS Ubuntu/Debian frais (testé pour Ubuntu
-24.04) avec Nginx en reverse proxy, PM2 pour garder l'application en vie, et
-HTTPS automatique via Let's Encrypt si vous avez un nom de domaine.
+Ce script est conçu pour un VPS qui héberge **déjà d'autres sites/applications**.
+Il ne touche à rien d'existant :
+
+| Ce qui pourrait entrer en conflit | Comment le script l'évite |
+| --- | --- |
+| Un Node.js système déjà installé (autre version) | Installe Node 22 via **nvm**, isolé dans le compte utilisateur — le Node système n'est ni modifié ni remplacé |
+| Une application déjà en écoute sur le port 3000 | Détecte automatiquement le **premier port libre** à partir de 3000 et le réutilise à chaque relance (stocké dans `.env`) |
+| Nginx déjà configuré pour d'autres sites | N'est modifié **que si vous fournissez un nom de domaine** ; dans ce cas, un **nouveau** fichier de site est ajouté — aucun site existant n'est touché ou supprimé |
+| D'autres applications gérées par PM2 | La nôtre est simplement ajoutée à la liste (`pm2 list`), rien d'autre n'est redémarré ou arrêté |
 
 ## 1. Connectez-vous à votre VPS
 
@@ -12,16 +18,7 @@ ssh ubuntu@VOTRE_IP
 
 ## 2. Lancez le script de déploiement
 
-**Avec un nom de domaine** (recommandé — pointez d'abord un enregistrement
-DNS A/AAAA vers l'IP du VPS) :
-
-```bash
-git clone --branch claude/ecommerce-olive-oil-site-mri2jo https://github.com/mimochak/s.git golden-spoon
-cd golden-spoon
-bash deploy/setup.sh boutique.votre-domaine.fr
-```
-
-**Sans domaine, juste pour tester par IP** (en HTTP, sans certificat) :
+**Accès direct par IP, sans toucher à Nginx** (ce que vous avez choisi pour l'instant) :
 
 ```bash
 git clone --branch claude/ecommerce-olive-oil-site-mri2jo https://github.com/mimochak/s.git golden-spoon
@@ -29,11 +26,20 @@ cd golden-spoon
 bash deploy/setup.sh
 ```
 
-Le script (`deploy/setup.sh`, lisible avant exécution) installe Node.js 22,
-Nginx, PM2 et Certbot, clone/compile l'application, initialise la base de
-données SQLite avec le catalogue de démonstration, démarre le site avec PM2
-et configure Nginx (+ HTTPS si un domaine est fourni). Il est **idempotent** :
-vous pouvez le relancer pour mettre à jour le site.
+Le site sera accessible sur `http://VOTRE_IP:PORT` — le port exact (3000, 3001…
+selon ce qui est déjà pris) est affiché à la fin du script.
+
+**Plus tard, avec un nom de domaine** (pointez d'abord un enregistrement DNS
+A/AAAA vers l'IP du VPS), pour avoir Nginx + HTTPS automatique :
+
+```bash
+cd ~/golden-spoon
+bash deploy/setup.sh boutique.votre-domaine.fr
+```
+
+Le script (`deploy/setup.sh`, lisible avant exécution) est **idempotent** :
+relancez-le à tout moment pour mettre à jour le site ou pour ajouter un
+domaine après coup.
 
 ## 3. Sécurisez l'accès admin
 
@@ -45,12 +51,12 @@ nano ~/golden-spoon/.env    # ADMIN_PASSWORD="votre-mot-de-passe-fort"
 pm2 restart golden-spoon
 ```
 
-L'admin est accessible sur `/admin` (ex. `https://boutique.votre-domaine.fr/admin`).
+L'admin est accessible sur `/admin` (ex. `http://VOTRE_IP:PORT/admin`).
 
 ## 4. (Recommandé) Sécurisez le VPS lui-même
 
-Le mot de passe root/ubuntu que vous avez utilisé pour vous connecter a
-transité en clair dans cette conversation — par précaution :
+Le mot de passe utilisé pour la connexion a transité en clair dans la
+conversation qui a servi à préparer ce déploiement — par précaution :
 
 ```bash
 passwd                 # changez le mot de passe de l'utilisateur
@@ -60,17 +66,29 @@ Et envisagez de passer à une authentification par clé SSH puis de désactiver
 l'authentification par mot de passe dans `/etc/ssh/sshd_config`
 (`PasswordAuthentication no`).
 
+## Vérifier qu'on ne dérange rien avant de lancer
+
+```bash
+pm2 list                 # applications déjà gérées par PM2 (rien ne sera arrêté)
+sudo nginx -T 2>/dev/null | grep server_name   # sites Nginx déjà configurés
+node -v                  # version du Node système actuel (ne sera pas touchée)
+ss -ltn                  # ports déjà occupés
+```
+
 ## Mettre à jour le site plus tard
 
 ```bash
 cd ~/golden-spoon
-bash deploy/setup.sh boutique.votre-domaine.fr   # mêmes arguments qu'au premier lancement
+bash deploy/setup.sh                              # garde le même port/domaine
+# ou, pour (re)configurer un domaine :
+bash deploy/setup.sh boutique.votre-domaine.fr
 ```
 
 Ou manuellement :
 
 ```bash
 cd ~/golden-spoon
+export NVM_DIR="$HOME/.nvm" && \. "$NVM_DIR/nvm.sh" && nvm use 22
 git pull
 npm ci
 npx prisma migrate deploy
@@ -81,10 +99,10 @@ pm2 restart golden-spoon
 ## Commandes utiles
 
 ```bash
-pm2 status              # état de l'application
-pm2 logs golden-spoon   # logs en direct
+pm2 status               # état de toutes les applications gérées
+pm2 logs golden-spoon    # logs en direct de ce site uniquement
 pm2 restart golden-spoon
-sudo nginx -t && sudo systemctl reload nginx   # après modif de la config Nginx
+cat ~/golden-spoon/.env | grep PORT   # retrouver le port utilisé
 ```
 
 ## Stripe (optionnel)
@@ -101,4 +119,4 @@ base sans paiement réel). Pour activer de vrais paiements de test, ajoutez
   `prisma/schema.prisma`).
 - **Un seul process Node** : PM2 peut être configuré en mode cluster
   (`instances: "max"` dans `ecosystem.config.js`) si besoin de monter en charge.
-- **Sauvegardes** : pensez à sauvegarder régulièrement `prisma/dev.db`.
+- **Sauvegardes** : pensez à sauvegarder régulièrement `~/golden-spoon/prisma/dev.db`.
