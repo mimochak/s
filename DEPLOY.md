@@ -29,6 +29,16 @@ bash deploy/setup.sh
 Le site sera accessible sur `http://VOTRE_IP:PORT` — le port exact (3000, 3001…
 selon ce qui est déjà pris) est affiché à la fin du script.
 
+**Pour imposer un port précis** (si vous avez déjà identifié un port libre,
+par ex. 3010) plutôt que de laisser le script partir de 3000 :
+
+```bash
+PORT=3010 bash deploy/setup.sh
+```
+
+Le script vérifie quand même que ce port est libre et prend le suivant
+disponible si ce n'est pas le cas.
+
 **Plus tard, avec un nom de domaine** (pointez d'abord un enregistrement DNS
 A/AAAA vers l'IP du VPS), pour avoir Nginx + HTTPS automatique :
 

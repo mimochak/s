@@ -73,10 +73,14 @@ if [ ! -f .env ]; then
 fi
 
 echo "==> Recherche d'un port libre pour l'application"
-# Réutilise le port choisi lors d'un lancement précédent (stocké dans .env), sinon part de 3000.
+# Point de départ : PORT (variable d'env passée à l'appel) > valeur déjà
+# stockée dans .env lors d'un lancement précédent > 3000 par défaut.
+# Dans tous les cas, le port est vérifié ci-dessous et incrémenté s'il est occupé.
 EXISTING_PORT="$(grep -E '^PORT=' .env 2>/dev/null | head -1 | cut -d'"' -f2 || true)"
-PORT="${EXISTING_PORT:-3000}"
+PORT="${PORT:-${EXISTING_PORT:-3000}}"
+echo "    Point de départ : $PORT"
 while (exec 3<>"/dev/tcp/127.0.0.1/$PORT") 2>/dev/null; do
+  echo "    Port $PORT occupé, essai du suivant…"
   exec 3<&- 3>&- 2>/dev/null || true
   PORT=$((PORT + 1))
 done
